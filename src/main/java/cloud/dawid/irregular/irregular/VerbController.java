@@ -174,4 +174,22 @@ public class VerbController {
             return "redirect:/l/en/"+idverb;
         }
     }
+
+    /*Nauka , tłumaczenie i wszystkie odmiany jawne*/
+    @RequestMapping(value = "/learn/{verb}", method = RequestMethod.GET)
+    public String showOneVerb(Model model, @PathVariable("verb") int verb) {
+
+        Optional<Verb> oneverb = verbService.getOneByID(verb);
+
+        if(verb < 100){
+            int nextverb = verb + 1;
+            model.addAttribute("nextverb", nextverb);
+        }else{
+            model.addAttribute("nextverb", "last");
+        }
+
+        model.addAttribute("verb", oneverb.get());
+        return "verblearn";
+    }
+
 }

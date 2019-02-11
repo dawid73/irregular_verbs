@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Czaswoniki nieregularne</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+    <link th:href="@{/public/css/grid.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+<div class="container">
+
+    <span th:if="${error == 'yes'}">
+        <div class="alert alert-danger" role="alert">
+        Błędna odpowiedź
+        </div>
+    </span>
+
+    <h1 class="display-4" th:text="${verb.tlumaczenie}"></h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-highlight">
+            <thead>
+            <th>Infinitive</th>
+            <th>Past tense</th>
+            <th>Past participle</th>
+            </thead>
+            <tbody>
+            <td><span th:text="${verb.infinitive}"></span></td>
+            <td><span th:text="${verb.pastsimple}"></span></td>
+            <td><span th:text="${verb.pastparticiple}"></span></td>
+            </tbody>
+        </table>
+        
+        <span th:if="${nextverb != 'last'}">
+        <a class="btn btn-primary" th:href="@{'/learn/'+${nextverb}}" role="button">Następny czasownik</a>
+        </span>
+        <span th:if="${nextverb == 'last'}">
+            To jest ostatni czasownik.
+        </span>
+
+
+    </div>
+
+</body>
+</html>

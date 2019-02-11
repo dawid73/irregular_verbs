@@ -32,14 +32,18 @@
             <td><span th:text="${verb.pastparticiple}"></span></td>
             </tbody>
         </table>
-        
-        <span th:if="${nextverb != 'last'}">
-        <a class="btn btn-primary" th:href="@{'/learn/'+${nextverb}}" role="button">Następny czasownik</a>
+        <div class="btn-group" role="group" aria-label="Nawigacja">
+            <span th:if="${prevverv != 'first'}">
+                <a th:href="@{'/learn/'+${prevverv}}" ><button type="button" class="btn btn-secondary">Poprzedni czasownik</button></a>
         </span>
-        <span th:if="${nextverb == 'last'}">
+            <span th:if="${nextverb != 'last'}">
+                <a th:href="@{'/learn/'+${nextverb}}" ><button type="button" class="btn btn-secondary">Następny czasownik</button></a>
+        </span>
+            <span th:if="${nextverb == 'last'}">
             To jest ostatni czasownik.
         </span>
 
+        </div>
 
     </div>
 

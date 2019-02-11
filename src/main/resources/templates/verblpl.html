@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Czaswoniki nieregularne</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
-    <link th:href="@{/public/css/grid.css}" rel="stylesheet" />
+    <link th:href="@{/public/css/grid.css}" rel="stylesheet"/>
 
 </head>
 <body>
@@ -19,85 +19,100 @@
 
     <h1 class="display-4" th:text="${verb.tlumaczenie}"></h1>
 
-        <form class="form-horizontal" th:action="@{'/l/pl/check/'}" th:method="post">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped table-highlight">
-                    <thead>
-                    <th>Infinitive</th>
-                    <th>Past tense</th>
-                    <th>Past participle</th>
-                    </thead>
-                    <tbody>
+    <form class="form-horizontal" th:action="@{'/l/pl/check/'}" th:method="post">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-highlight">
+                <thead>
+                <th>Infinitive</th>
+                <th>Past tense</th>
+                <th>Past participle</th>
+                </thead>
+                <tbody>
 
-                    <td>
-                        <th:block th:switch="${infinitive}">
-                            <div th:case="'error'">
-                                <input type="text" class="form-control is-invalid"  name="infinitive" autocomplete="off"/>
-                                <div class="invalid-feedback">
-                                    Błędna odpowiedź. Poprawna to: <b><span th:text="${verb.infinitive}"></span> </b>
-                                </div>
+                <td>
+                    <th:block th:switch="${infinitive}">
+                        <div th:case="'error'">
+                            <input type="text" class="form-control is-invalid" name="infinitive" autocomplete="off"/>
+                            <div class="invalid-feedback">
+                                Błędna odpowiedź. Poprawna to: <b><span th:text="${verb.infinitive}"></span> </b>
                             </div>
-                            <div th:case="'correct'">
-                                <input type="text" class="form-control is-valid"  name="infinitive" th:value="${verb.infinitive}" autocomplete="off"/>
-                                <div class="valid-feedback">
-                                    Poprawna odpowiedź
-                                </div>
+                        </div>
+                        <div th:case="'correct'">
+                            <input type="text" class="form-control is-valid" name="infinitive"
+                                   th:value="${verb.infinitive}" autocomplete="off"/>
+                            <div class="valid-feedback">
+                                Poprawna odpowiedź
                             </div>
-                            <div th:case="*"><input type="text" class="form-control" name="infinitive" autocomplete="off"/></div>
-                        </th:block>
-                    </td>
+                        </div>
+                        <div th:case="*"><input type="text" class="form-control" name="infinitive" autocomplete="off"/>
+                        </div>
+                    </th:block>
+                </td>
 
-                    <td>
-                        <th:block th:switch="${pastsimple}">
-                            <div th:case="'error'">
-                                <input type="text" class="form-control is-invalid"  name="pastsimple" autocomplete="off"/>
-                                <div class="invalid-feedback">
-                                    Błędna odpowiedź. Poprawna to: <b><span th:text="${verb.pastsimple}"></span> </b>
-                                </div>
+                <td>
+                    <th:block th:switch="${pastsimple}">
+                        <div th:case="'error'">
+                            <input type="text" class="form-control is-invalid" name="pastsimple" autocomplete="off"/>
+                            <div class="invalid-feedback">
+                                Błędna odpowiedź. Poprawna to: <b><span th:text="${verb.pastsimple}"></span> </b>
                             </div>
-                            <div th:case="'correct'">
-                                <input type="text" class="form-control is-valid"  name="pastsimple" th:value="${verb.pastsimple}" autocomplete="off"/>
-                                <div class="valid-feedback">
-                                    Poprawna odpowiedź
-                                </div>
+                        </div>
+                        <div th:case="'correct'">
+                            <input type="text" class="form-control is-valid" name="pastsimple"
+                                   th:value="${verb.pastsimple}" autocomplete="off"/>
+                            <div class="valid-feedback">
+                                Poprawna odpowiedź
                             </div>
-                            <div th:case="*"><input type="text" class="form-control" name="pastsimple" autocomplete="off"/></div>
-                        </th:block>
-                    </td>
+                        </div>
+                        <div th:case="*"><input type="text" class="form-control" name="pastsimple" autocomplete="off"/>
+                        </div>
+                    </th:block>
+                </td>
 
-                    <td>
-                        <th:block th:switch="${pastparticiple}">
-                            <div th:case="'error'">
-                                <input type="text" class="form-control is-invalid"  name="pastparticiple" autocomplete="off"/>
-                                <div class="invalid-feedback">
-                                    Błędna odpowiedź. Poprawna to: <b><span th:text="${verb.pastparticiple}"></span> </b>
-                                </div>
+                <td>
+                    <th:block th:switch="${pastparticiple}">
+                        <div th:case="'error'">
+                            <input type="text" class="form-control is-invalid" name="pastparticiple"
+                                   autocomplete="off"/>
+                            <div class="invalid-feedback">
+                                Błędna odpowiedź. Poprawna to: <b><span th:text="${verb.pastparticiple}"></span> </b>
                             </div>
-                            <div th:case="'correct'">
-                                <input type="text" class="form-control is-valid"  name="pastparticiple" th:value="${verb.pastparticiple}" autocomplete="off"/>
-                                <div class="valid-feedback">
-                                    Poprawna odpowiedź
-                                </div>
+                        </div>
+                        <div th:case="'correct'">
+                            <input type="text" class="form-control is-valid" name="pastparticiple"
+                                   th:value="${verb.pastparticiple}" autocomplete="off"/>
+                            <div class="valid-feedback">
+                                Poprawna odpowiedź
                             </div>
-                            <div th:case="*"><input type="text" class="form-control" name="pastparticiple" autocomplete="off"/></div>
-                        </th:block>
-                    </td>
+                        </div>
+                        <div th:case="*"><input type="text" class="form-control" name="pastparticiple"
+                                                autocomplete="off"/></div>
+                    </th:block>
+                </td>
 
-                    </tbody>
+                </tbody>
 
-                </table>
-                    <input type="hidden" id="idverb" name="idverb" th:value="${verb.id}"/>
-                    <button type="submit" class="btn btn-default">Sprawdź</button>
-            </div>
-        </form>
+            </table>
+            <input type="hidden" id="idverb" name="idverb" th:value="${verb.id}"/>
+            <button type="submit" class="btn btn-default">Sprawdź</button>
+        </div>
+    </form>
 
     <span th:if="${error == 'no'}">
-        <span th:if="${nextverb != 'last'}">
-        <a class="btn btn-primary" th:href="@{'/l/pl/'+${nextverb}}" role="button">Następny czasownik</a>
+               <div class="btn-group" role="group" aria-label="Nawigacja">
+            <span th:if="${prevverv != 'first'}">
+                <a th:href="@{'/l/pl/'+${prevverv}}"><button type="button" class="btn btn-secondary">Poprzedni czasownik</button></a>
         </span>
-        <span th:if="${nextverb == 'last'}">
+            <span th:if="${nextverb != 'last'}">
+                <a th:href="@{'/l/pl/'+${nextverb}}"><button type="button"
+                                                              class="btn btn-secondary">Następny czasownik</button></a>
+        </span>
+            <span th:if="${nextverb == 'last'}">
             To jest ostatni czasownik.
         </span>
+
+        </div>
+
     </span>
 
 

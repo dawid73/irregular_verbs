@@ -42,6 +42,12 @@ public class VerbController {
         }else{
             model.addAttribute("nextverb", "last");
         }
+        if(verb > 1){
+            int prevverb = verb - 1;
+            model.addAttribute("prevverv", prevverb);
+        }else{
+            model.addAttribute("prevverv", "first");
+        }
 
 
         //jeżeli jest błędna odpowiedz to dodajemy info o tym
@@ -126,6 +132,12 @@ public class VerbController {
         }else{
             model.addAttribute("nextverb", "last");
         }
+        if(verb > 1){
+            int prevverb = verb - 1;
+            model.addAttribute("prevverv", prevverb);
+        }else{
+            model.addAttribute("prevverv", "first");
+        }
 
 
         //jeżeli jest błędna odpowiedz to dodajemy info o tym
@@ -186,6 +198,12 @@ public class VerbController {
             model.addAttribute("nextverb", nextverb);
         }else{
             model.addAttribute("nextverb", "last");
+        }
+        if(verb > 1){
+            int prevverb = verb - 1;
+            model.addAttribute("prevverv", prevverb);
+        }else{
+            model.addAttribute("prevverv", "first");
         }
 
         model.addAttribute("verb", oneverb.get());

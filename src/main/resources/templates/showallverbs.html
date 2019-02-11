@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Czaswoniki nieregularne</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+
+</head>
+<body>
+
+<div class="container">
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">infinitive</th>
+            <th scope="col">past tense</th>
+            <th scope="col">past participle</th>
+            <th scope="col">polish</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="v:${verbList}">
+            <th th:text="${v.id}" scope="row"></th>
+            <th th:text="${v.infinitive}"></th>
+            <th th:text="${v.pastsimple}"></th>
+            <th th:text="${v.pastparticiple}"></th>
+            <th th:text="${v.tlumaczenie}"></th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

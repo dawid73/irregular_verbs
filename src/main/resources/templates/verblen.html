@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Czaswoniki nieregularne</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+
+</head>
+<body>
+
+<div class="container">
+
+    <span th:if="${error == 'yes'}">
+        <div class="alert alert-danger" role="alert">
+        Błędna odpowiedź
+        </div>
+    </span>
+
+
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-highlight">
+                <thead>
+                <th>Infinitive</th>
+                <th>Past tense</th>
+                <th>Past participle</th>
+                </thead>
+                <tbody>
+                <td><span th:text="${verb.infinitive}"></span> </td>
+                <td><span th:text="${verb.pastsimple}"></span> </td>
+                <td><span th:text="${verb.pastparticiple}"></span> </td>
+                </tbody>
+
+
+            </table>
+            <form class="form-horizontal" th:action="@{'/l/en/check/'}" th:method="post">
+
+                <th:block th:switch="${tlumaczenie}">
+                    <div th:case="'error'">
+                        <input type="text" class="form-control is-invalid"  name="tlumaczenie" autocomplete="off"/>
+                        <div class="invalid-feedback">
+                            Błędna odpowiedź. Poprawna to: <b><span th:text="${verb.tlumaczenie}"></span> </b>
+                        </div>
+                    </div>
+                    <div th:case="'correct'">
+                        <input type="text" class="form-control is-valid"  name="tlumaczenie" th:value="${verb.tlumaczenie}" autocomplete="off"/>
+                        <div class="valid-feedback">
+                            Poprawna odpowiedź
+                        </div>
+                    </div>
+                    <div th:case="*"><input type="text" class="form-control" name="tlumaczenie" autocomplete="off"/></div>
+                </th:block>
+
+            <input type="hidden" id="idverb" name="idverb" th:value="${verb.id}"/>
+            <button type="submit" class="btn btn-default">Sprawdź</button>
+
+            </form>
+
+    <span th:if="${error == 'no'}">
+        <span th:if="${nextverb != 'last'}">
+        <a class="btn btn-primary" th:href="@{'/l/en/'+${nextverb}}" role="button">Następny czasownik</a>
+        </span>
+        <span th:if="${nextverb == 'last'}">
+            To jest ostatni czasownik.
+        </span>
+    </span>
+
+
+</div>
+
+</body>
+</html>

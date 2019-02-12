@@ -24,4 +24,8 @@ public class VerbService {
     public Optional<Verb> getOneByID(int verb) {
         return verbRepository.findVerbById(verb);
     }
+
+    public Optional<Verb> getFirstInThisUnit(int unit) {
+        return verbRepository.getVerbByFirstInUnitAndUnit(true, unit);
+    }
 }

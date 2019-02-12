@@ -15,10 +15,20 @@
 
 <div class="container">
 
+    <div class="row">
+        <div class="col">
+            <h5>
+                <small class="text-muted">
+                    Grupa: <span th:text="${verb.unit}"></span>
+                    Czasownik: <span th:text="${verb.id}"></span>
+                </small> </h5>
+        </div>
+    </div>
+
 
     <h1 class="display-4" th:text="${verb.tlumaczenie}"></h1>
 
-    <div class="table-responsive">
+
         <table class="table table-bordered table-striped table-highlight">
             <thead>
             <th>Infinitive</th>
@@ -36,7 +46,7 @@
                 <a th:href="@{'/learn/'+${prevverv}}" ><button type="button" class="btn btn-secondary">Poprzedni czasownik</button></a>
         </span>
             <span th:if="${nextverb != 'last'}">
-                <a th:href="@{'/learn/'+${nextverb}}" ><button type="button" class="btn btn-secondary">Następny czasownik</button></a>
+                <a th:href="@{'/learn/'+${nextverb}}" ><button type="button" class="btn btn-secondary" tabindex="1">Następny czasownik</button></a>
         </span>
             <span th:if="${nextverb == 'last'}">
             To jest ostatni czasownik.
@@ -44,7 +54,36 @@
 
         </div>
 
+        <div class="row">
+            <div class="col">
+            <span th:if="${czyostatni == 'true'}">
+                <div class="alert alert-success" role="alert">
+                  <h4 class="alert-heading">Well done! To ostatni czasownik w grupie <span th:text="${verb.unit}"></span></h4>
+                 <hr>
+                    <p>
+                        Przejdź teraz to ćwiczeń z Angielskiego na Polski<br/>
+                        <a th:href="@{'/l/en/'+${firstverbinthisunit.id}}" >
+                            <button type="button" class="btn btn-success">Polski na Angielski [grupa: <span th:text="${verb.unit}"></span> ]</button>
+                        </a>
+             </p><hr>
+                    <p>
+                        Możesz potrenować i zaczać od nowa<br/>
+                    <a th:href="@{'/learn/'+${firstverbinthisunit.id}}" >
+                        <button type="button" class="btn btn-success">Angielski na Polski [grupa: <span th:text="${verb.unit}"></span> ]</button>
+                    </a>
+               </p>
+                    </div>
+            </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="margin-top: 10em">
+                <a class="btn btn-primary" th:href="@{/}" role="button">Menu</a>
+            </div>
+        </div>
+
     </div>
+
 
 </body>
 </html>

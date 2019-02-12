@@ -20,6 +20,11 @@ public class VerbController {
     }
 
     @GetMapping("/")
+    public String welcome(){
+        return "welcome";
+    }
+
+    @GetMapping("/showall")
     public String findAll(Model model){
         List<Verb> verbList = verbService.listVerbs();
         model.addAttribute("verbList", verbList);
@@ -61,9 +66,20 @@ public class VerbController {
             model.addAttribute("info", info);
         }
 
+
+        boolean czyostatni = oneverb.get().getLastInUnit();
+        if(czyostatni){
+            model.addAttribute("czyostatni", "true");
+            Integer unit = oneverb.get().getUnit();
+            Optional<Verb> firstVerbInUnit = verbService.getFirstInThisUnit(unit);
+            model.addAttribute("firstverbinthisunit", firstVerbInUnit.get());
+        }
+
         model.addAttribute("verb", oneverb.get());
         return "verblpl";
     }
+
+
 
     @RequestMapping(value = "/l/pl/check/", method = RequestMethod.POST)
     public String checkOnePL(Model model,
@@ -149,6 +165,14 @@ public class VerbController {
             model.addAttribute("info", info);
         }
 
+        boolean czyostatni = oneverb.get().getLastInUnit();
+        if(czyostatni){
+            model.addAttribute("czyostatni", "true");
+            Integer unit = oneverb.get().getUnit();
+            Optional<Verb> firstVerbInUnit = verbService.getFirstInThisUnit(unit);
+            model.addAttribute("firstverbinthisunit", firstVerbInUnit.get());
+        }
+
         model.addAttribute("verb", oneverb.get());
         return "verblen";
     }
@@ -204,6 +228,14 @@ public class VerbController {
             model.addAttribute("prevverv", prevverb);
         }else{
             model.addAttribute("prevverv", "first");
+        }
+
+        boolean czyostatni = oneverb.get().getLastInUnit();
+        if(czyostatni){
+            model.addAttribute("czyostatni", "true");
+            Integer unit = oneverb.get().getUnit();
+            Optional<Verb> firstVerbInUnit = verbService.getFirstInThisUnit(unit);
+            model.addAttribute("firstverbinthisunit", firstVerbInUnit.get());
         }
 
         model.addAttribute("verb", oneverb.get());

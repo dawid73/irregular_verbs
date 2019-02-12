@@ -20,6 +20,36 @@ public class Verb {
 
     private String tlumaczenie;
 
+    private Boolean firstInUnit;
+
+    private Boolean lastInUnit;
+
+    private Integer unit;
+
+    public Boolean getFirstInUnit() {
+        return firstInUnit;
+    }
+
+    public void setFirstInUnit(Boolean firstInUnit) {
+        this.firstInUnit = firstInUnit;
+    }
+
+    public Boolean getLastInUnit() {
+        return lastInUnit;
+    }
+
+    public void setLastInUnit(Boolean lastInUnit) {
+        this.lastInUnit = lastInUnit;
+    }
+
+    public Integer getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Integer unit) {
+        this.unit = unit;
+    }
+
     public Integer getId() {
         return id;
     }

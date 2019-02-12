@@ -14,6 +14,17 @@
 <body>
 
 <div class="container">
+
+    <div class="row">
+        <div class="col">
+            <h5>
+                <small class="text-muted">
+                    Grupa: <span th:text="${verb.unit}"></span>
+                    Czasownik: <span th:text="${verb.id}"></span>
+                </small> </h5>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
     <span th:if="${error == 'yes'}">
@@ -37,7 +48,7 @@
                 Infinitive
                 <th:block th:switch="${infinitive}">
                     <div th:case="'error'">
-                        <input type="text" class="form-control is-invalid" name="infinitive" autocomplete="off" tabindex="1"/>
+                        <input type="text" class="form-control is-invalid" name="infinitive" autocomplete="off" tabindex="2"/>
                         <div class="invalid-feedback">
                             Błędna odpowiedź.
                             <a tabindex="0" class="btn btn-sm btn-danger" role="button"
@@ -52,7 +63,7 @@
                             Poprawna odpowiedź
                         </div>
                     </div>
-                    <div th:case="*"><input type="text" class="form-control" name="infinitive" autocomplete="off" tabindex="1"/>
+                    <div th:case="*"><input type="text" class="form-control" name="infinitive" autocomplete="off" tabindex="2"/>
                     </div>
                 </th:block>
             </div>
@@ -61,7 +72,7 @@
                 Past tense
                 <th:block th:switch="${pastsimple}">
                     <div th:case="'error'">
-                        <input type="text" class="form-control is-invalid" name="pastsimple" autocomplete="off" tabindex="2"/>
+                        <input type="text" class="form-control is-invalid" name="pastsimple" autocomplete="off" tabindex="3"/>
                         <div class="invalid-feedback">
                             Błędna odpowiedź.
                             <a tabindex="0" class="btn btn-sm btn-danger" role="button"
@@ -76,7 +87,7 @@
                             Poprawna odpowiedź
                         </div>
                     </div>
-                    <div th:case="*"><input type="text" class="form-control" name="pastsimple" autocomplete="off" tabindex="2"/>
+                    <div th:case="*"><input type="text" class="form-control" name="pastsimple" autocomplete="off" tabindex="3"/>
                     </div>
                 </th:block>
             </div>
@@ -86,7 +97,7 @@
                 <th:block th:switch="${pastparticiple}">
                     <div th:case="'error'">
                         <input type="text" class="form-control is-invalid" name="pastparticiple"
-                               autocomplete="off" tabindex="3"/>
+                               autocomplete="off" tabindex="4"/>
                         <div class="invalid-feedback">
                             Błędna odpowiedź.
                             <a tabindex="0" class="btn btn-sm btn-danger" role="button"
@@ -102,7 +113,7 @@
                         </div>
                     </div>
                     <div th:case="*"><input type="text" class="form-control" name="pastparticiple"
-                                            autocomplete="off" tabindex="3"/></div>
+                                            autocomplete="off" tabindex="4"/></div>
                 </th:block>
             </div>
         </div>
@@ -121,7 +132,7 @@
         </span>
             <span th:if="${nextverb != 'last'}">
                 <a th:href="@{'/l/pl/'+${nextverb}}"><button type="button"
-                                                             class="btn btn-secondary">Następny czasownik</button></a>
+                                                             class="btn btn-secondary" tabindex="1">Następny czasownik</button></a>
         </span>
             <span th:if="${nextverb == 'last'}">
             To jest ostatni czasownik.
@@ -130,6 +141,38 @@
         </div>
 
     </span>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <span th:if="${czyostatni == 'true' and error =='no'}">
+                <div class="alert alert-success" role="alert">
+                  <h4 class="alert-heading">Well done! To ostatni czasownik w grupie <span th:text="${verb.unit}"></span></h4>
+                 <hr>
+                    <p>
+                        Przejdź teraz do następnej grupy<br/>
+                        <a th:href="@{'/l/en/'+${nextverb}}" >
+                            <button type="button" class="btn btn-success">Angielski na Polski </button>
+                        </a>
+             </p><hr>
+                    <p>
+                        Możesz potrenować i zaczać od nowa<br/>
+                    <a th:href="@{'/l/en/'+${firstverbinthisunit.id}}" >
+                        <button type="button" class="btn btn-success">Angielski na Polski [grupa: <span th:text="${verb.unit}"></span> ]</button>
+                    </a><br/>
+                        <a th:href="@{'/l/pl/'+${firstverbinthisunit.id}}" >
+                        <button type="button" class="btn btn-success">Polski na Angielski [grupa: <span th:text="${verb.unit}"></span> ]</button>
+                    </a>
+               </p>
+                    </div>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="margin-top: 10em">
+            <a class="btn btn-primary" th:href="@{/}" role="button">Menu</a>
         </div>
     </div>
 
@@ -145,4 +188,5 @@
             trigger: 'focus'
         })
 </script>
+
 </html>

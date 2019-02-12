@@ -6,68 +6,88 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
     <link th:href="@{/public/css/grid.css}" rel="stylesheet"/>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
 <div class="container">
-
-    <span th:if="${error == 'yes'}">
-        <div class="alert alert-danger" role="alert">
-        Błędna odpowiedź
+        <div class="row">
+            <div class="col">
+                 <span th:if="${error == 'yes'}">
+                <div class="alert alert-danger" role="alert">
+                Błędna odpowiedź
+                </div>
+            </span>
+            </div>
         </div>
-    </span>
 
+        <div class="row">
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped table-highlight">
-            <thead>
-            <th>Infinitive</th>
-            <th>Past tense</th>
-            <th>Past participle</th>
-            </thead>
-            <tbody>
-            <td><span th:text="${verb.infinitive}"></span></td>
-            <td><span th:text="${verb.pastsimple}"></span></td>
-            <td><span th:text="${verb.pastparticiple}"></span></td>
-            </tbody>
-
-
-        </table>
-        <form class="form-inline" th:action="@{'/l/en/check/'}" th:method="post">
-            <div class="form-group mx-sm-3 mb-2">
-                <th:block th:switch="${tlumaczenie}">
-                    <div th:case="'error'">
-                        <input type="text" class="form-control is-invalid" name="tlumaczenie" autocomplete="off"/>
-                        <div class="invalid-feedback">
-                            Błędna odpowiedź. Poprawna to: <b><span th:text="${verb.tlumaczenie}"></span> </b>
-                        </div>
-                    </div>
-                    <div th:case="'correct'">
-                        <input type="text" class="form-control is-valid" name="tlumaczenie"
-                               th:value="${verb.tlumaczenie}"
-                               autocomplete="off"/>
-                        <div class="valid-feedback">
-                            Poprawna odpowiedź
-                        </div>
-                    </div>
-                    <div th:case="*"><input type="text" class="form-control" name="tlumaczenie" autocomplete="off"/>
-                    </div>
-                </th:block>
+            <div class="col-12 col-md-4">
+                <h3><small class="text-muted">Infinitive:</small>
+                    <span th:text="${verb.infinitive}"></span></h3>
             </div>
 
-            <input type="hidden" id="idverb" name="idverb" th:value="${verb.id}"/>
-            <button type="submit" class="btn btn-default mb-2">Sprawdź</button>
+            <div class="col-12 col-md-4">
+                <h3><small class="text-muted">Past tense:</small>
+                    <span th:text="${verb.pastsimple}"></span></h3>
+            </div>
 
-        </form>
+            <div class="col-12 col-md-4">
+                <h3><small class="text-muted">Past participle:</small>
+                    <span th:text="${verb.pastparticiple}"></span></h3>
+            </div>
 
-        <span th:if="${error == 'no'}">
+        </div>
+        <div class="row">
+            <div class="col">
+                <form class="form-inline" th:action="@{'/l/en/check/'}" th:method="post">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <th:block th:switch="${tlumaczenie}">
+                            <div th:case="'error'">
+                                <input type="text" class="form-control is-invalid" name="tlumaczenie" autocomplete="off" tabindex="1"/>
+                                <div class="invalid-feedback">
+                                    Błędna odpowiedź.
+
+                                    <a tabindex="0" class="btn btn-sm btn-danger" role="button"
+                                       data-toggle="popover" data-trigger="focus"
+                                       th:data-content="${verb.tlumaczenie}">Zobacz odpowiedź</a>
+
+                                </div>
+                            </div>
+                            <div th:case="'correct'">
+                                <input type="text" class="form-control is-valid" name="tlumaczenie"
+                                       th:value="${verb.tlumaczenie}"
+                                       autocomplete="off"/>
+                                <div class="valid-feedback">
+                                    Poprawna odpowiedź
+                                </div>
+                            </div>
+                            <div th:case="*"><input type="text" class="form-control" name="tlumaczenie" autocomplete="off" tabindex="1"/>
+                            </div>
+                        </th:block>
+                    </div>
+
+                    <input type="hidden" id="idverb" name="idverb" th:value="${verb.id}"/>
+                    <button type="submit" class="btn btn-default mb-2" tabindex="2">Sprawdź</button>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <span th:if="${error == 'no'}">
         <div class="btn-group" role="group" aria-label="Nawigacja">
             <span th:if="${prevverv != 'first'}">
                 <a th:href="@{'/l/en/'+${prevverv}}"><button type="button" class="btn btn-secondary">Poprzedni czasownik</button></a>
         </span>
             <span th:if="${nextverb != 'last'}">
                 <a th:href="@{'/l/en/'+${nextverb}}"><button type="button"
-                                                              class="btn btn-secondary">Następny czasownik</button></a>
+                                                             class="btn btn-secondary">Następny czasownik</button></a>
         </span>
             <span th:if="${nextverb == 'last'}">
             To jest ostatni czasownik.
@@ -76,9 +96,20 @@
         </div>
 
     </span>
+            </div>
+        </div>
 
 
     </div>
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    }),
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
+
+</script>
 
 </body>
 </html>
